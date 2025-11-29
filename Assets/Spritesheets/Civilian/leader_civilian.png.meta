@@ -335,8 +335,8 @@ TextureImporter:
       name: leader_civilian_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 512
+        y: 256
         width: 256
         height: 256
       alignment: 0
@@ -357,8 +357,8 @@ TextureImporter:
       name: leader_civilian_11
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
+        x: 768
+        y: 256
         width: 256
         height: 256
       alignment: 0
@@ -371,6 +371,94 @@ TextureImporter:
       bones: []
       spriteID: fffbe2bcd2c01475a9c9d0b46827441e
       internalID: -703456470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leader_civilian_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fcb755cc68af42c1be9842ef9e5dea3
+      internalID: 1898234394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leader_civilian_13
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 183f6687e7da44dc39df41f840edb86f
+      internalID: -1468882192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leader_civilian_14
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c01a684b25f8e44d8a02af4c0b910bfc
+      internalID: -2057239818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leader_civilian_15
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2abacbd3be5e42c4b82532d5d22dbff
+      internalID: -1610267810
       vertices: []
       indices: 
       edges: []
@@ -395,6 +483,10 @@ TextureImporter:
       leader_civilian_1: -534024039586163383
       leader_civilian_10: -659140086
       leader_civilian_11: -703456470
+      leader_civilian_12: 1898234394
+      leader_civilian_13: -1468882192
+      leader_civilian_14: -2057239818
+      leader_civilian_15: -1610267810
       leader_civilian_2: 8957762432245953397
       leader_civilian_3: 8225298956673928181
       leader_civilian_4: 4702783282836632349
