@@ -152,22 +152,23 @@ MonoBehaviour:
   tileSpacing: 0
   mapSeed: 0
   maxNumberOfVolcanoes: 4
+  maxNumberOfFish: 4
   mountainClusterScale: 0.2
-  waterClusterScale: 0.15
-  forestClusterScale: 0.3
+  waterClusterScale: 0.2
+  forestClusterScale: 0.15
   mountainThreshold: 0.75
-  waterThreshold: 0.6
-  forestThreshold: 0.4
-  plainsTilePrefab: {fileID: 1774869684222979449, guid: fc0b528776d331c458426516da935ce3, type: 3}
-  hillTilePrefab: {fileID: 1774869684222979449, guid: 30f6b059b42a96143a56ebfcf85e2108, type: 3}
-  forest1TilePrefab: {fileID: 1774869684222979449, guid: b3de98ffb6d9c7743a83a47f9e4fed21, type: 3}
-  forest2TilePrefab: {fileID: 1774869684222979449, guid: 5b040ed791ee8dc4a90c9070660a1f80, type: 3}
-  farmTilePrefab: {fileID: 1774869684222979449, guid: f1d292d034ebc0c4fa2cfd4ddd0c0a37, type: 3}
-  lumberHutTilePrefab: {fileID: 1774869684222979449, guid: b2da903b42c8ba2488cf67568472322a, type: 3}
-  mountainTilePrefab: {fileID: 1774869684222979449, guid: 0d9b30595303a6d42a0235b7557e6dd0, type: 3}
-  volcanoTilePrefab: {fileID: 1774869684222979449, guid: e62f53c8a56685f4e886fe855a64a350, type: 3}
-  waterTilePrefab: {fileID: 1774869684222979449, guid: 1eca833ea7e5e29408057df0c06f8f32, type: 3}
-  fishTilePrefab: {fileID: 1774869684222979449, guid: 4494513e3da87b84d8f6b2ffe95c88ef, type: 3}
+  waterThreshold: 0.8
+  forestThreshold: 0.55
+  plainsTilePrefab: {fileID: 0}
+  hillTilePrefab: {fileID: 0}
+  forest1TilePrefab: {fileID: 0}
+  forest2TilePrefab: {fileID: 0}
+  farmTilePrefab: {fileID: 0}
+  lumberHutTilePrefab: {fileID: 0}
+  mountainTilePrefab: {fileID: 0}
+  volcanoTilePrefab: {fileID: 0}
+  waterTilePrefab: {fileID: 0}
+  fishTilePrefab: {fileID: 0}
 --- !u!4 &212249929
 Transform:
   m_ObjectHideFlags: 0
