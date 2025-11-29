@@ -8,7 +8,7 @@ public class MilitaryUnit : Unit
     public bool isFortified;
     public int fortifyBonus;
     
-    public MilitaryUnit(Tile startingTile) : base(startingTile){
+    public MilitaryUnit(Tile tile) : base(tile){
         
     }
     
