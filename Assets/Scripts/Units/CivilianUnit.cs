@@ -1,15 +1,14 @@
-using UnityEngine;
-
-public class CivilianUnit : MonoBehaviour
+public class CivilianUnit : Unit
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int numOfRoundsToBuild = 3; // Number of rounds required to complete a building task
+    public bool isWorking = false;
+    
+    public CivilianUnit(Tile startingTile) : base (startingTile)
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    void Start()
     {
         
     }

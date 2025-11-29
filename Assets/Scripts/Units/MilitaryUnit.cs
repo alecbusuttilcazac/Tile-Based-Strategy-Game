@@ -1,15 +1,18 @@
-using UnityEngine;
-
-public class MilitaryUnit : MonoBehaviour
+public class MilitaryUnit : Unit
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    public int attack;
+    public int range;
+    public int defense;
+    public bool isRanged;
+    public bool canFortify;
+    public bool isFortified;
+    public int fortifyBonus;
+    
+    public MilitaryUnit(Tile startingTile) : base(startingTile){
         
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    void Start()
     {
         
     }
