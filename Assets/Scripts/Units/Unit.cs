@@ -7,6 +7,7 @@ public class Unit
     public int maxHealth;
     public bool isDead = false;
     public bool canTraverseWater;
+    public bool canTraverseLand;
     public int tileMovement; // Number of tiles the unit can move
     public int tileVision; // Number of tiles away the unit can see
     public int coinCost; // Cost in coins to produce the unit
