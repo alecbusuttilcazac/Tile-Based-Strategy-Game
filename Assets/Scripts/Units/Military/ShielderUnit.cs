@@ -3,11 +3,11 @@ public class ShieldedUnit : MilitaryUnit{
     public ShieldedUnit(Tile tile) : base(tile)
     {
         unitName = "Shielder";
-        maxHealth = 175;
+        maxHealth = 150;
         currentHealth = maxHealth;
         attack = 8;
         range = 1;
-        meleeDefense = 20;
+        meleeDefense = 15;
         rangedDefense = -10;
 
         canFortify = true;

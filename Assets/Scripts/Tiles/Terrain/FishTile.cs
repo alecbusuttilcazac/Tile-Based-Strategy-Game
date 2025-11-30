@@ -1,6 +1,6 @@
-public class LumberHutTile : Tile
+public class FishTile : TerrainTile
 {
-    public LumberHutTile(int x, int y) : base(x, y)
+    public FishTile(int x, int y) : base(x, y)
     {
         movementCost = 1;
         defenseBonus = 0;

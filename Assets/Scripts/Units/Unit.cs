@@ -12,24 +12,14 @@ public class Unit
     public int tileVision; // Number of tiles away the unit can see
     public int coinCost; // Cost in coins to produce the unit
     public int roundCost; // Number of rounds required to produce the unit
-    // public Player Owner; OR public int ownerID;
+    public Player owner;
     public bool isSelected = false;
     public bool hasMoved = false;
     
     public Tile currentTile;
-    public Sprite visualSprite;
+    public Sprite sprite;
     
     public Unit(Tile currentTile){
         this.currentTile = currentTile;
-    }
-        
-    void Start()
-    {
-        
-    }
-
-    public void SetSprite(Sprite obj)
-    {
-        visualSprite = obj;
     }
 }

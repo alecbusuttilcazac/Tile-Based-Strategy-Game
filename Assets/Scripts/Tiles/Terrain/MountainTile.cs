@@ -1,4 +1,4 @@
-public class MountainTile : Tile
+public class MountainTile : TerrainTile
 {
     public MountainTile(int x, int y) : base(x, y)
     {

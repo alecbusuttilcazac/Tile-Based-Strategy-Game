@@ -1,6 +1,6 @@
-public class HillTile : Tile
+public class PlainsTile : TerrainTile
 {
-    public HillTile(int x, int y) : base(x, y)
+    public PlainsTile(int x, int y) : base(x, y)
     {
         movementCost = 1;
         defenseBonus = 0;

@@ -1,4 +1,4 @@
-public class VolcanoTile : Tile
+public class VolcanoTile : TerrainTile
 {
     public VolcanoTile(int x, int y) : base(x, y)
     {
