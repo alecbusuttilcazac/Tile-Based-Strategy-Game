@@ -71,6 +71,13 @@ public class MapManager : MonoBehaviour
     
     public Tile GetTile(int x, int y) { return grid[x, y]; }
     
+    public void SetTile(int x, int y, Tile newTile) 
+    { 
+        if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y)
+            throw new System.Exception($"Tile position ({x}, {y}) is out of bounds");
+        grid[x, y] = newTile; 
+    }
+    
     void InitialiseGrid()
     {
         grid = new Tile[gridSize.x, gridSize.y]; // create the empty grid

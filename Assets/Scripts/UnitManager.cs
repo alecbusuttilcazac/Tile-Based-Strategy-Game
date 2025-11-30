@@ -7,4 +7,8 @@ public class UnitManager : MonoBehaviour
         Debug.Log("UnitManager initialized.");
         // Unit initialization code will go here
     }
+    
+    public void CreateUnit(Unit unit){
+        
+    }
 }

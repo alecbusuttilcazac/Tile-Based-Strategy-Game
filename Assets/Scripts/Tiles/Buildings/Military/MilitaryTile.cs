@@ -1,4 +1,4 @@
-public class MilitaryTile : BuildingTile
+public abstract class MilitaryTile : BuildingTile
 {    
     public MilitaryTile(int x, int y) : base(x, y)
     {
