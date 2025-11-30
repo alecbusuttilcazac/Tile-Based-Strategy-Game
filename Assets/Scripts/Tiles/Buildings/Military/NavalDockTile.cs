@@ -8,7 +8,6 @@ public class NavalDockTile : MilitaryTile
         coinCost = 300;
         roundCost = 15;
         movementCost = 1;
-        defenseBonus = 0;
         impassable = false;
     }
     

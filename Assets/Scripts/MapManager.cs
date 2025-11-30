@@ -40,9 +40,9 @@ public class MapManager : MonoBehaviour
     public GameObject waterTilePrefab;
     public GameObject fishTilePrefab;
     
-    public void Initialize()
+    public void Initialise(List<Vector2Int> citiesCoordinates, List<Vector2Int> trainingCampsCoordinates)
     {
-        Debug.Log("MapManager initialized.");
+        Debug.Log("MapManager Initialised.");
         
         // Checks if tile prefabs are square
         if(plainsTilePrefab.transform.localScale.x != plainsTilePrefab.transform.localScale.y
@@ -60,7 +60,7 @@ public class MapManager : MonoBehaviour
         tileSize = plainsTilePrefab.transform.localScale.x;
 
         // Calls InitialiseGrid() to actually build the map
-        InitialiseGrid();
+        InitialiseGrid(citiesCoordinates, trainingCampsCoordinates);
     }
 
     // Update is called once per frame
@@ -70,15 +70,78 @@ public class MapManager : MonoBehaviour
     }
     
     public Tile GetTile(int x, int y) { return grid[x, y]; }
+    public Tile GetTile(Vector2Int coords) { return grid[coords.x, coords.y]; }
     
     public void SetTile(int x, int y, Tile newTile) 
     { 
         if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y)
             throw new System.Exception($"Tile position ({x}, {y}) is out of bounds");
+        
+        // Destroy old tile's visual before replacing
+        Tile oldTile = grid[x, y];
+        if (oldTile != null && oldTile.visualObject != null)
+            Destroy(oldTile.visualObject);
+        
         grid[x, y] = newTile; 
     }
     
-    void InitialiseGrid()
+    public List<Vector2Int> PlaceCities(int numPlayers){
+        List<Vector2Int> citiesCoordinates = new();
+        int sectionsX = 2; // 2x2 grid for 4 players
+        int sectionsY = 2;
+
+        for (int i = 0; i < numPlayers; i++)
+        {
+            int sectionX = i % sectionsX;
+            int sectionY = i / sectionsX;
+            
+            int startX = (gridSize.x / sectionsX) * sectionX + (gridSize.x / sectionsX / 2);
+            int startY = (gridSize.y / sectionsY) * sectionY + (gridSize.y / sectionsY / 2);
+            
+            citiesCoordinates.Add(new Vector2Int(startX, startY));
+        }
+        
+        return citiesCoordinates;
+    }
+    
+    public List<Vector2Int> PlaceTrainingCamps(List<Vector2Int> citiesCoordinates){
+        List<Vector2Int> trainingCampCoordinates = new();
+        
+        foreach(Vector2Int cityPos in citiesCoordinates)
+        {
+            // Get all 4 orthogonal neighbors
+            List<Vector2Int> validPositions = new();
+            
+            Vector2Int[] neighbors = {
+                new(cityPos.x + 1, cityPos.y),
+                new(cityPos.x - 1, cityPos.y),
+                new(cityPos.x, cityPos.y + 1),
+                new(cityPos.x, cityPos.y - 1)
+            };
+            
+            foreach(Vector2Int pos in neighbors)
+            {
+                // Check if position is within grid bounds
+                if (pos.x >= 0 && pos.x < gridSize.x && pos.y >= 0 && pos.y < gridSize.y)
+                {
+                    Tile tile = GetTile(pos.x, pos.y);
+                    // Check if tile is buildable (not water, not mountain, etc.)
+                    if (!tile.impassable || tile is WaterTile or FishTile) validPositions.Add(pos);
+                }
+            }
+            
+            if (validPositions.Count == 0)
+                throw new System.Exception($"No valid positions for training camp near city at ({cityPos.x}, {cityPos.y})");
+            
+            // Pick random valid position
+            Vector2Int trainingCampPos = validPositions[UnityEngine.Random.Range(0, validPositions.Count)];
+            trainingCampCoordinates.Add(trainingCampPos);
+        }
+        
+        return trainingCampCoordinates;
+    }
+    
+    void InitialiseGrid(List<Vector2Int> citiesCoordinates, List<Vector2Int> trainingCampsCoordinates)
     {
         grid = new Tile[gridSize.x, gridSize.y]; // create the empty grid
         
@@ -87,6 +150,7 @@ public class MapManager : MonoBehaviour
         List<Vector2Int> plainsTiles = new();
         List<Vector2Int> waterTiles = new();
         
+        float offset = tileSize + tileSpacing;
         bool oddTile = false; // for switching or rotating textures - random feel
         float rotation = 0f;
         
@@ -101,6 +165,50 @@ public class MapManager : MonoBehaviour
                 
                 oddTile = !oddTile;
                 rotation = 0f;
+                
+                bool isCity = false;
+                foreach(Vector2Int coordinate in citiesCoordinates){
+                    if(coordinate.x == x && coordinate.y == y){
+                        isCity = true;
+                        
+                        tile = new CityTile(x, y);
+                        GameObject cityVisual = Instantiate(
+                            waterTilePrefab, // TODO change to proper city prefab
+                            new Vector3(x * offset, y * offset, 0), 
+                            Quaternion.Euler(0, 0, rotation),
+                            transform
+                        );
+                        
+                        cityVisual.name = $"Tile_{x:D2}x_{y:D2}y";
+                        tile.SetVisualObject(cityVisual);
+                        
+                        grid[x, y] = tile;
+                        break;
+                    }
+                }
+                if (isCity) continue;
+                
+                bool isTrainingCamp = false;
+                foreach(Vector2Int coordinate in trainingCampsCoordinates){
+                    if(coordinate.x == x && coordinate.y == y){
+                        isTrainingCamp = true;
+                        
+                        tile = new TrainingCampTile(x, y);
+                        GameObject trainingCampVisual = Instantiate(
+                            waterTilePrefab, // TODO change to proper training camp prefab
+                            new Vector3(x * offset, y * offset, 0), 
+                            Quaternion.Euler(0, 0, rotation),
+                            transform
+                        );
+                        
+                        trainingCampVisual.name = $"TrainingCamp_{x:D2}x_{y:D2}y";
+                        tile.SetVisualObject(trainingCampVisual);
+                        
+                        grid[x, y] = tile;
+                        break;
+                    }
+                }
+                if (isTrainingCamp) continue;
                 
                 /*  
                     Generate Perlin noise values for each terrain type (using seedOffset for variation)
@@ -151,7 +259,6 @@ public class MapManager : MonoBehaviour
                 }
                 
                 // Instantiate the tile GameObject – This creates the visual representation in the world.
-                float offset = tileSize + tileSpacing;
                 GameObject visual = Instantiate(
                     tilePrefab, 
                     new Vector3(x * offset, y * offset, 0), 

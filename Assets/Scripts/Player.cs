@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
         this.playerName = playerName;
         establishedCities.Add(cityTile);
         ownedBuildings.Add(trainingCamp);
+        soldier.owner = this;
         ownedUnits.Add(soldier);
     }
     
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
             if(tile is not ResourceTile) continue;
             
             ResourceTile resourceTile = (ResourceTile) tile;
-            moneyPerTurn += resourceTile.moneyPerRound;
+            moneyPerTurn += resourceTile.coinsPerRound;
         }
         
         return moneyPerTurn;

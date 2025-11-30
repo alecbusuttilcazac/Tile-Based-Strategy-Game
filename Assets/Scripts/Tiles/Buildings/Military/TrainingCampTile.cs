@@ -10,4 +10,15 @@ public class TrainingCampTile : MilitaryTile
         movementCost = 1;
         impassable = false;
     }
+    
+    public override void NextRound(){
+        if(roundsUntilCompletion == 0){
+            //add functionality and add current unit info
+            
+            currentlyProducing = null;
+            return;
+        }
+        
+        roundsUntilCompletion--;
+    }
 }
