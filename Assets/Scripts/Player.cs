@@ -74,6 +74,22 @@ public class Player : MonoBehaviour
         unit.owner = this;
     }
     
+    public void AddCity(CityTile tile){
+        if(tile == null) throw new System.Exception("Cannot add null city");
+        if(establishedCities.Contains(tile)) return; // Already owned
+        
+        establishedCities.Add(tile);
+        tile.owner = this;
+    }
+    
+    public void AddBuilding(BuildingTile tile){
+        if(tile == null) throw new System.Exception("Cannot add null building");
+        if(ownedBuildings.Contains(tile)) return; // Already owned
+        
+        ownedBuildings.Add(tile);
+        tile.owner = this;
+    }
+    
     public void AddBuilding(Tile oldTile, BuildingTile buildingTile, GameObject buildingPrefab, MapManager mapManager){
         if(buildingTile == null) 
             throw new System.Exception("Cannot add null building tile");

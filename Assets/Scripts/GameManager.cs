@@ -29,8 +29,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager started.");
         
         // Initialise managers in specific order
-        if(playerNames.Count > 4) new System.Exception("Too many players");
-        List<Vector2Int> citiesCoordinates = mapManager.PlaceCities(players.Count);
+        if(playerNames.Count > 4) throw new System.Exception("Too many players");
+        List<Vector2Int> citiesCoordinates = mapManager.PlaceCities(playerNames.Count);
         List<Vector2Int> trainingCampsCoordinates = mapManager.PlaceTrainingCamps(citiesCoordinates);
         
         mapManager.Initialise(citiesCoordinates, trainingCampsCoordinates); // Map first
@@ -56,10 +56,8 @@ public class GameManager : MonoBehaviour
             player.playerName = playerNames[i];
             player.establishedCities.Add(city);
             player.ownedBuildings.Add(trainingCamp);
-            
-            SoldierUnit soldier = new(mapManager.GetTile(citiesCoordinates[i]));
-            soldier.owner = player;
-            player.ownedUnits.Add(soldier);
+            SoldierUnit unit = new SoldierUnit(mapManager.GetTile(citiesCoordinates[i]));
+            unitManager.CreateUnit(unit, player);
             
             players.Add(player);
         }

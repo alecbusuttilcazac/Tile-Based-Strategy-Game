@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class Unit
+public abstract class Unit
 {
     public string unitName;
     public int currentHealth;
     public int maxHealth;
     public bool canTraverseWater;
     public bool canTraverseLand;
+    public bool isDead = false;
     public int tileMovement; // Number of tiles the unit can move
     public int tileVision; // Number of tiles away the unit can see
     public int coinCost; // Cost in coins to produce the unit
@@ -32,4 +33,6 @@ public class Unit
         currentHealth += addedHealth;
         if(currentHealth > maxHealth) currentHealth = maxHealth;
     }
+    
+    public abstract void Damage(int attackDamage);
 }

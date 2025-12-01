@@ -40,35 +40,6 @@ public class MapManager : MonoBehaviour
     public GameObject waterTilePrefab;
     public GameObject fishTilePrefab;
     
-    public void Initialise(List<Vector2Int> citiesCoordinates, List<Vector2Int> trainingCampsCoordinates)
-    {
-        Debug.Log("MapManager Initialised.");
-        
-        // Checks if tile prefabs are square
-        if(plainsTilePrefab.transform.localScale.x != plainsTilePrefab.transform.localScale.y
-            || !plainsTilePrefab){
-            throw new Exception("Tile scale is not square.");
-        }
-        
-        // If mapSeed == 0, pick a random noise offset otherwise use the given seed
-        if (mapSeed == 0)
-            seedOffset = UnityEngine.Random.Range(0f, 10000f);
-        else
-            seedOffset = mapSeed;
-        
-        // Gets the tile's size for correct placement
-        tileSize = plainsTilePrefab.transform.localScale.x;
-
-        // Calls InitialiseGrid() to actually build the map
-        InitialiseGrid(citiesCoordinates, trainingCampsCoordinates);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
     public Tile GetTile(int x, int y) { return grid[x, y]; }
     public Tile GetTile(Vector2Int coords) { return grid[coords.x, coords.y]; }
     
@@ -85,13 +56,29 @@ public class MapManager : MonoBehaviour
         grid[x, y] = newTile; 
     }
     
-    public List<Vector2Int> PlaceCities(int numPlayers){
+    public void Initialise(List<Vector2Int> citiesCoordinates, List<Vector2Int> trainingCampsCoordinates)
+    {
+        Debug.Log("MapManager Initialised.");
+        
+        // Checks if tile prefabs are square
+        if(plainsTilePrefab.transform.localScale.x != plainsTilePrefab.transform.localScale.y
+            || !plainsTilePrefab){
+            throw new Exception("Tile scale is not square.");
+        }        
+        // Gets the tile's size for correct placement
+        tileSize = plainsTilePrefab.transform.localScale.x;
+
+        // Calls InitialiseGrid() to actually build the map
+        InitialiseGrid(citiesCoordinates, trainingCampsCoordinates);
+    }
+    
+    public List<Vector2Int> PlaceCities(int numPlayers)
+    {
         List<Vector2Int> citiesCoordinates = new();
         int sectionsX = 2; // 2x2 grid for 4 players
         int sectionsY = 2;
 
-        for (int i = 0; i < numPlayers; i++)
-        {
+        for (int i = 0; i < numPlayers; i++){
             int sectionX = i % sectionsX;
             int sectionY = i / sectionsX;
             
@@ -104,7 +91,8 @@ public class MapManager : MonoBehaviour
         return citiesCoordinates;
     }
     
-    public List<Vector2Int> PlaceTrainingCamps(List<Vector2Int> citiesCoordinates){
+    public List<Vector2Int> PlaceTrainingCamps(List<Vector2Int> citiesCoordinates)
+    {
         List<Vector2Int> trainingCampCoordinates = new();
         
         foreach(Vector2Int cityPos in citiesCoordinates)
@@ -144,6 +132,10 @@ public class MapManager : MonoBehaviour
     void InitialiseGrid(List<Vector2Int> citiesCoordinates, List<Vector2Int> trainingCampsCoordinates)
     {
         grid = new Tile[gridSize.x, gridSize.y]; // create the empty grid
+        
+        // If mapSeed == 0, pick a random noise offset otherwise use the given seed
+        if (mapSeed == 0) seedOffset = UnityEngine.Random.Range(0f, 10000f);
+        else seedOffset = mapSeed;
         
         // Prepare lists for later cluster detection – These lists remember where certain tiles were placed.
         List<Vector2Int> mountainTiles = new();

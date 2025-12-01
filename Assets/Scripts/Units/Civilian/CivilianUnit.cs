@@ -5,8 +5,7 @@ public class CivilianUnit : Unit
         
     }
     
-    void Start()
-    {
-        
+    public override void Damage(int attackDamage){
+        maxHealth -= attackDamage;
     }
 }
